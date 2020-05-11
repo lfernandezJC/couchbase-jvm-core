@@ -714,7 +714,8 @@ public abstract class AbstractEndpoint extends AbstractStateMachine<LifecycleSta
      *
      * @return the bucket name.
      */
-    protected String bucket() {
+    @Override
+    public String bucket() {
         return bucket;
     }
 
@@ -767,6 +768,14 @@ public abstract class AbstractEndpoint extends AbstractStateMachine<LifecycleSta
     public String remoteAddress() {
         return this.hostname + ":" + this.port;
     }
+
+    /**
+     * Returns the channel used by this endpoint.
+     *
+     * @return the netty channel
+     */
+    @Override
+    public Channel channel() { return channel; }
 
     /**
      * Simple log helper to give logs a common prefix.

@@ -38,7 +38,7 @@ import rx.subjects.Subject;
 
 import java.util.concurrent.TimeUnit;
 
-public class ResponseHandler implements EventHandler<ResponseEvent> {
+public class ResponseHandler extends SequenceAwareEventHandler<ResponseEvent> {
 
     private static final CouchbaseLogger LOGGER = CouchbaseLoggerFactory.getInstance(ResponseHandler.class);
 
@@ -93,6 +93,7 @@ public class ResponseHandler implements EventHandler<ResponseEvent> {
     @Override
     public void onEvent(final ResponseEvent event, long sequence, boolean endOfBatch) throws Exception {
         try {
+            super.onEvent(event, sequence, endOfBatch);
             CouchbaseMessage message = event.getMessage();
             if (message instanceof SignalConfigReload) {
                 configurationProvider.signalOutdated();

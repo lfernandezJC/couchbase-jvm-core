@@ -28,6 +28,8 @@ import com.couchbase.client.core.state.Stateful;
 import com.lmax.disruptor.RingBuffer;
 import rx.Observable;
 
+import java.util.List;
+
 /**
  * Represents a {@link Service} on a {@link Node}.
  *
@@ -77,6 +79,13 @@ public interface Service extends Stateful<LifecycleState> {
      * Returns endpoint health information for all endpoints this service is currently associated with.
      */
     Observable<EndpointHealth> diagnostics();
+
+    /**
+     * Returns the current list of endpoints.
+     *
+     * @return the list of endpoints.
+     */
+    List<Endpoint> endpoints();
 
     /**
      * A helper factory which generates endpoints.
